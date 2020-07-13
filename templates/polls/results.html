@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1 class="mb-5 text-center">{{ fraga.fraga_text }}</h1>
+
+<ul class="list-group mb-5">
+	{% for val in fraga.val_set.all %}
+	<li class="list-group-item">
+		{{ val.val_text }}  <span class="badge badge-success float-right">{{ val.roster }}</span>
+	</li>
+	{% endfor %}
+</ul>
+
+<a class="btn btn-secondary" href="{% url 'polls:index' %}">Tillbaka till omröstningar</a>
+<a class="btn btn-dark" href="{% url 'polls:detail' fraga.id %}">Rösta igen</a>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1 class="text-center mb-3">Röstning</h1>
+    {% if latest_fraga_list %}
+        {% for fraga in latest_fraga_list %}
+        <div class="card mb-3">
+            <div class="card-body">
+                <p class="lead">{{ fraga.fraga_text }}</p>
+                <a href="{% url 'polls:detail' fraga.id %}" class="btn btn-primary btn-sm">Rösta</a>
+                <a href="{% url 'polls:results' fraga.id %}" class="btn btn-secondary btn-sm">Resultat</a>
+            </div>
+
+        </div> 
+        {% endfor %}
+    {% else %}
+        <p>Inga omröstningar finns tillgängliga</p>
+    {% endif %}
+
+{% endblock %}
