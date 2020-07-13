@@ -1,0 +1,1 @@
+web:gunicorn medbdialog_project.wsgi --log-file -
