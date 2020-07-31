@@ -1,8 +1,11 @@
 {% extends 'base.html' %}
 {% block content %}
+
+<script src="https://cdn.zingchart.com/zingchart.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <h1 class="mb-5 text-center">{{ fraga.fraga_text }}</h1>
 
-<ul class="list-group mb-5">
+<ul class="list-group mb-2">
 	{% for val in fraga.val_set.all %}
 	<li class="list-group-item">
 		{{ val.val_text }}  <span class="badge badge-success float-right">{{ val.roster }}</span>
@@ -10,6 +13,104 @@
 	{% endfor %}
 </ul>
 
+<div id="myChart"></div>
 <a class="btn btn-secondary" href="{% url 'polls:index' %}">Tillbaka till omröstningar</a>
 <a class="btn btn-dark" href="{% url 'polls:detail' fraga.id %}">Rösta igen</a>
+
+<script>
+	
+	var state = {
+		'items':[],
+		'values':[],
+	}
+
+	var objId = "{{fraga.id}}"
+	
+	var dataUrl = `/polls/resultsdata/${objId}`
+
+	$.ajax({
+		method: 'GET',
+		url: dataUrl,
+		success: function(response){
+			console.log('RESPONSE:', response)
+			for (var i in response){
+				
+				var key = Object.keys(response[i])[0]
+				var value = Object.values(response[i])[0]
+
+				state.items.push(key)
+				state.values.push(value)
+			}
+
+			console.log('STATE:', state)
+			buildChart()
+			consoleLog()
+		}
+	})
+	function consoleLog(){
+		console.log(state.items[0])
+		console.log(state.items[1])
+		console.log(state.items[2])
+		console.log(state.items[3])
+		console.log(state.items[4])
+	}
+	function buildChart(){
+		var chartData = {
+		"type":"pie",
+		plot: {
+			borderColor: "white",
+			borderWidth: 5,
+			valueBox: {
+			placement: 'in',
+			text: '%t\n%npv%',
+			},
+			animation: {
+			effect: 2,
+			method: 5,
+			speed: 900,
+			sequence: 1,
+			delay: 1000
+			}
+		},
+		plotarea: {
+			margin: "0 0 0 0"
+		},
+		series: [{
+			values: [state.values[0]],
+			text: state.items[0],
+			backgroundColor: '#50ADF5',
+			},
+			{
+			values: [state.values[1]],
+			text: state.items[1],
+			backgroundColor: '#FF7965',
+			},
+			{
+			values: [state.values[2]],
+			text: state.items[2],
+			backgroundColor: '#FFCB45',
+			},
+			{
+			text: state.items[3],
+			values: [state.values[3]],
+			backgroundColor: '#6877e5'
+			},
+			{
+			text: state.items[4],
+			values: [state.values[4]],
+			backgroundColor: '#6FB07F',
+			detached: true
+			}
+		]
+		};
+
+		zingchart.render({
+		id: 'myChart',
+		data: chartData,
+		});
+		}
+	
+
+</script>
+
 {% endblock %}

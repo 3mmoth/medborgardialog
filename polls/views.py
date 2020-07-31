@@ -2,6 +2,7 @@ from django.template import loader
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
+from django.http import JsonResponse
 
 from .models import Fraga, Val
 
@@ -43,3 +44,14 @@ def rosta(request, fraga_id):
         # with POST data. This prevents data from being posted twice if a
         # user hits the Back button.
         return HttpResponseRedirect(reverse('polls:results', args=(fraga.id,)))
+
+def resultsData(request, obj):
+  rostdata = []
+
+  fraga = Fraga.objects.get(id=obj)
+  roster = fraga.val_set.all()
+
+  for i in roster:
+    rostdata.append({i.val_text: i.roster})
+
+  return JsonResponse(rostdata, safe = False)
