@@ -3,8 +3,9 @@
 
 <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<h1 class="mb-5 text-center">{{ fraga.fraga_text }}</h1>
-
+<h1 class="mb-5 text-center" style="color: white;">{{ fraga.fraga_text }}</h1>
+<a class="btn btn-secondary" href="{% url 'polls:index' %}">Tillbaka till omröstningar</a>
+<a class="btn btn-dark" href="{% url 'polls:detail' fraga.id %}">Rösta igen</a>
 <ul class="list-group mb-2">
 	{% for val in fraga.val_set.all %}
 	<li class="list-group-item">
@@ -14,8 +15,6 @@
 </ul>
 
 <div id="myChart"></div>
-<a class="btn btn-secondary" href="{% url 'polls:index' %}">Tillbaka till omröstningar</a>
-<a class="btn btn-dark" href="{% url 'polls:detail' fraga.id %}">Rösta igen</a>
 
 <script>
 	
@@ -57,6 +56,7 @@
 	function buildChart(){
 		var chartData = {
 		"type":"pie",
+		"backgroundColor": "transparent",
 		plot: {
 			borderColor: "white",
 			borderWidth: 5,
@@ -73,7 +73,8 @@
 			}
 		},
 		plotarea: {
-			margin: "0 0 0 0"
+			margin: "0 0 0 0",
+			backgroundColor: "transparent"
 		},
 		series: [{
 			values: [state.values[0]],
@@ -106,7 +107,7 @@
 
 		zingchart.render({
 		id: 'myChart',
-		data: chartData,
+		data: chartData
 		});
 		}
 	
