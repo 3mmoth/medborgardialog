@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+    body {
+        background: url(https://source.unsplash.com/q7xs3bDTrQM/1600x900); 
+        background-size: cover; 
+        background-attachment: fixed;
+    }
+</style>
+
+<div class="card text-center">
+  <div class="card-body">
+    <h1>Vi vill veta vad du tycker!</h1>
+    <p></p>
+    <a class="btn btn-dark" href="{% url 'polls:index' %}">
+        Gå vidare till omröstningar</a
+      >
+  </div>
+  </div>
+{% endblock %}

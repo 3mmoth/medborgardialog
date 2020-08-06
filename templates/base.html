@@ -6,12 +6,17 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" 
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous" />
+        <style>
+            html,body {
+                height: 100%;
+                }
+        </style>
         <title>Medborgardialog {% block title %}{{% endblock %}</title>
     </head>
-    <body style="background: url(https://source.unsplash.com/q7xs3bDTrQM/1600x900); background-size: cover; background-attachment: fixed;">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 m-auto">
+    <body>
+        <div class="container h-100">
+            <div class="row h-100">
+                <div class="col-sm-12 my-auto">
                     {% block content %}{% endblock %}
                 </div>
             </div>

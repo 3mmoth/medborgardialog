@@ -1,15 +1,23 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1 class="text-center mb-3" style="color: white;">Röstning</h1>
+<style>
+    body {
+        background: url(https://source.unsplash.com/Mzi9DBcqDP8/1600x900); 
+        background-size: cover; 
+        background-attachment: fixed;
+    }
+</style>
+<h1 class="text-center mb-3" style="color: white;">Rösta</h1>
     {% if latest_fraga_list %}
         {% for fraga in latest_fraga_list %}
         <div class="card mb-3">
             <div class="card-body">
-                <p class="lead">{{ fraga.fraga_text }}</p>
-                <a href="{% url 'polls:detail' fraga.id %}" class="btn btn-primary btn-sm">Rösta</a>
-                <a href="{% url 'polls:results' fraga.id %}" class="btn btn-secondary btn-sm">Resultat</a>
+                <p class="lead text-center">{{ fraga.fraga_text }}</p>
+                <div class="text-center">
+                    <a href="{% url 'polls:detail' fraga.id %}" class="btn btn-primary btn-sm">Rösta</a>
+                    <a href="{% url 'polls:results' fraga.id %}" class="btn btn-secondary btn-sm">Resultat</a>
+                </div>
             </div>
-
         </div> 
         {% endfor %}
     {% else %}

@@ -1,9 +1,16 @@
 {% extends 'base.html' %}
 {% block content %}
-
+<style>
+    body {
+        background: url(https://source.unsplash.com/f6pTWzCELoE/1600x900); 
+        background-size: cover; 
+        background-attachment: fixed;
+    }
+</style>
 <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<h1 class="mb-5 text-center" style="color: white;">{{ fraga.fraga_text }}</h1>
+<h1 class="text-center" style="color: white;">{{ fraga.fraga_text }}</h1>
+<h2 class="mb-5 text-center" style="color: white;">Så tycker ni:</h2>
 <a class="btn btn-secondary" href="{% url 'polls:index' %}">Tillbaka till omröstningar</a>
 <a class="btn btn-dark" href="{% url 'polls:detail' fraga.id %}">Rösta igen</a>
 <ul class="list-group mb-2">
@@ -69,7 +76,7 @@
 			method: 5,
 			speed: 900,
 			sequence: 1,
-			delay: 1000
+			delay: 2000
 			}
 		},
 		plotarea: {
